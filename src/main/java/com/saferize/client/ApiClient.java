@@ -41,8 +41,7 @@ import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
 
 public class ApiClient {
 
-//    private String basePath = "http://api.saferize.com";
-    private String basePath = "http://api.dev.saferize";
+    private String basePath = "http://api.saferize.com";
     private boolean debugging = false;
     private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
     private String tempFolderPath = null;

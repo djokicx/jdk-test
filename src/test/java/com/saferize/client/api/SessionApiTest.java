@@ -3,6 +3,8 @@
 
 package com.saferize.client.api;
 
+import static org.junit.Assert.*;
+
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Date;
@@ -41,6 +43,7 @@ public class SessionApiTest {
         approvalApi = new ApprovalApi();
         sessionApi = new SessionApi();
     }
+    
     /**
      * Create an app user session
      *
@@ -58,6 +61,7 @@ public class SessionApiTest {
         String token = approval.getAppUser().getToken();
         
         AppUsageSession response = sessionApi.createAppUserSession(token);
+        assertTrue(response.getApproval().equals(approval));
     }
     
 

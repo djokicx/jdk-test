@@ -41,7 +41,6 @@ public class ApprovalApiTest {
         bearerAuth.setPrivateKeyFromPEM("src/main/resources/private_key.pem");
         bearerAuth.setApiKey("4a98ed10-3492-43b2-b3d6-545d988b64f2");
         
-        
         api = new ApprovalApi();
         
     }

@@ -21,17 +21,15 @@ Retrieve an Approval via identifier
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
-//import io.swagger.client.api.ApprovalApi;
+//import com.saferize.client.SaferizeApiException;
+//import com.saferize.client.api.ApprovalApi;
 
 
 
 ApprovalApi apiInstance = new ApprovalApi();
 
-Long id = Arrays.asList(789L); // Long | Unique identifier for the approval.
-
 try {
-    Approval result = apiInstance.getApprovalById(id);
+    Approval result = apiInstance.getApprovalById(667L);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling ApprovalApi#getApprovalById");
@@ -69,17 +67,15 @@ Retrieve an Approval via token
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
-//import io.swagger.client.api.ApprovalApi;
+//import com.saferize.client.SaferizeApiException;
+//import com.saferize.client.api.ApprovalApi;
 
 
 
 ApprovalApi apiInstance = new ApprovalApi();
 
-Long token = Arrays.asList(789L); // Long | The unique token assigned by the app to the user.
-
 try {
-    Approval result = apiInstance.getApprovalByToken(token);
+    Approval result = apiInstance.getApprovalByToken("username");
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling ApprovalApi#getApprovalByToken");
@@ -110,7 +106,7 @@ Name | Type | Description  | Notes
 
 <a name="getApprovals"></a>
 # **getApprovals**
-> List getApprovals()
+> List<Approval> getApprovals()
 
 List App approvals
 
@@ -119,15 +115,15 @@ Retrieves all the approvals associated with the app.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
-//import io.swagger.client.api.ApprovalApi;
+//import com.saferize.client.SaferizeApiException;
+//import com.saferize.client.api.ApprovalApi;
 
 
 
 ApprovalApi apiInstance = new ApprovalApi();
 
 try {
-    List result = apiInstance.getApprovals();
+    List<Approval> result = apiInstance.getApprovals();
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling ApprovalApi#getApprovals");
@@ -155,26 +151,24 @@ This endpoint does not need any parameter.
 
 <a name="initiateApproval"></a>
 # **initiateApproval**
-> Approval initiateApproval(body)
+> Approval initiateApproval(bodyEmail, token)
 
 Initiate an Approval
 
-A new approval object is created in order to get parent consent to add a new app user (a child).  Your app will be able to initiate approvals once it is pu lished. To learn more about setting up your app, please read our [Quick Start Guide](http://google.com).
+A new approval object is created in order to get parent consent to add a new app user (a child).  Your app will be able to initiate approvals once it is published.
 
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
-//import io.swagger.client.api.ApprovalApi;
+//import com.saferize.client.SaferizeApiException;
+//import com.saferize.client.api.ApprovalApi;
 
 
 
 ApprovalApi apiInstance = new ApprovalApi();
 
-Object body = ; // Object | The new Approval
-
 try {
-    Approval result = apiInstance.initiateApproval(body);
+    Approval result = apiInstance.initiateApproval("parent@email.com", "username");
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling ApprovalApi#initiateApproval");
@@ -186,7 +180,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Object**](Object.md)| The new Approval |
+**parentEmail** | **String**| Parent email specified at the upon approval creation. |
+**token** | **String**| The unique token assigned by the app to the user. |
 
 
 ### Return type

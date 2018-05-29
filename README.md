@@ -26,8 +26,8 @@ Add this dependency to your project's POM:
 
 ```xml
 <dependency>
-    <groupId>io.swagger</groupId>
-    <artifactId>swagger-java-client</artifactId>
+    <groupId>com.saferize</groupId>
+    <artifactId>saferize-java-client</artifactId>
     <version>1.0.0</version>
     <scope>compile</scope>
 </dependency>
@@ -41,27 +41,16 @@ Add this dependency to your project's build file:
 compile "com.saferize:saferize-java-client:1.0.0"
 ```
 
-### Others
-
-At first generate the JAR by executing:
-
-    mvn package
-
-Then manually install the following JARs:
-
-* target/swagger-java-client-1.0.0.jar
-* target/lib/*.jar
-
 ## Getting Started
 
 Please follow the [installation](#installation) instruction and execute the following Java code:
 
 ```java
 
-import io.swagger.client.*;
-import io.swagger.client.auth.*;
-import io.swagger.client.model.*;
-import io.swagger.client.api.AppApi;
+import com.saferize.client.*;
+import com.saferize.client.auth.*;
+import com.saferize.client.model.*;
+import com.saferize.client.api.AppApi;
 
 import java.io.File;
 import java.util.*;
@@ -71,26 +60,20 @@ public class AppApiExample {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
         
-        // Configure HTTP basic authorization: BearerAuth
-        HttpBasicAuth BearerAuth = (HttpBasicAuth) defaultClient.getAuthentication("BearerAuth");
-        BearerAuth.setUsername("YOUR USERNAME");
-        BearerAuth.setPassword("YOUR PASSWORD");
+        // Configure authorization: Bearer
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("Bearer");
+        bearerAuth.setPrivateKeyFromPEM("src/main/resources/private_key.pem");
+        bearerAuth.setApiKey("4a98ed10-3492-43b2-b3d6-545d988b64f2");
         
+        ApprovalApi api = new ApprovalApi();
         
-
-        AppApi apiInstance = new AppApi();
-        
-        Object body = ; // Object | App fields to be updated.
-        
-        Long id = Arrays.asList(789L); // Long | The identifier of the app to retrieve.
-        
-        try {
-            App result = apiInstance.changeAppAttributes(body, id);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling AppApi#changeAppAttributes");
-            e.printStackTrace();
-        }
+		try {
+		    Approval result = apiInstance.initiateApproval("parent@email.com", "username");
+		    System.out.println(result);
+		} catch (ApiException e) {
+		    System.err.println("Exception when calling ApprovalApi#initiateApproval");
+		    e.printStackTrace();
+		}
     }
 }
 
@@ -112,39 +95,19 @@ Class | Method | HTTP request | Description
 ## Documentation for Models
 
  - [App](docs/App.md)
- - [AppConfig](docs/AppConfig.md)
- - [AppFeature](docs/AppFeature.md)
- - [AppFeatureName](docs/AppFeatureName.md)
  - [AppUsageSession](docs/AppUsageSession.md)
  - [AppUser](docs/AppUser.md)
  - [Approval](docs/Approval.md)
- - [Child](docs/Child.md)
- - [Developer](docs/Developer.md)
- - [Error](docs/Error.md)
- - [Family](docs/Family.md)
- - [ImageUpload](docs/ImageUpload.md)
- - [JsonPatch](docs/JsonPatch.md)
- - [Parent](docs/Parent.md)
- - [Session](docs/Session.md)
- - [SubscriptionPlan](docs/SubscriptionPlan.md)
- - [Validator](docs/Validator.md)
 
 
 ## Documentation for Authorization
 
 Authentication schemes defined for the API:
 ### BearerAuth
-
+Read more about [JWT Tokens](https://jwt.io/introduction/).
 
 - **Type**: HTTP authentication
 
-
-
-
-
-## Recommendation
-
-It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
 
 ## Author
 

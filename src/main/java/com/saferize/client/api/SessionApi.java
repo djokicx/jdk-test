@@ -24,15 +24,19 @@ public class SessionApi extends SaferizeApi {
     }
     
     /**
-     * Build call for createAppUserSession
+     * Create an app user session
+     * 
      * @param token Unique username (alias) for the app user on the app. (required)
-     * @param progressListener Progress listener
-     * @param progressRequestListener Progress request listener
-     * @return Call to execute
-     * @throws SaferizeApiException If fail to serialize the request body object
+     * @return AppUsageSession
+     * @throws SaferizeApiException If fail to call the API, e.g. server error or cannot deserialize the response body
         
      */
-    public com.squareup.okhttp.Call createAppUserSessionCall(String token) throws SaferizeApiException {
+    public AppUsageSession createAppUserSession(String token) throws SaferizeApiException {
+        ApiResponse<AppUsageSession> resp = createAppUserSessionWithHttpInfo(token);
+        return resp.getData();
+    }
+    
+    private com.squareup.okhttp.Call createAppUserSessionCall(String token) throws SaferizeApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -64,8 +68,6 @@ public class SessionApi extends SaferizeApi {
     }
     
     private com.squareup.okhttp.Call createAppUserSessionValidateBeforeCall(String token) throws SaferizeApiException {
-        
-        
         // verify the required parameter 'token' is set
         if (token == null) {
             throw new SaferizeApiException("Missing the required parameter 'token' when calling createAppUserSession()");
@@ -74,37 +76,9 @@ public class SessionApi extends SaferizeApi {
         
         com.squareup.okhttp.Call call = createAppUserSessionCall(token);
         return call;
-
-        
-        
-        
-        
-        
-        
     }
 
-    /**
-     * Create an app user session
-     * 
-     * @param token Unique username (alias) for the app user on the app. (required)
-     * @return AppUsageSession
-     * @throws SaferizeApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-        
-     */
-    public AppUsageSession createAppUserSession(String token) throws SaferizeApiException {
-        ApiResponse<AppUsageSession> resp = createAppUserSessionWithHttpInfo(token);
-        return resp.getData();
-    }
-
-    /**
-     * Create an app user session
-     * 
-     * @param token Unique username (alias) for the app user on the app. (required)
-     * @return ApiResponse&lt;AppUsageSession&gt;
-     * @throws SaferizeApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-        
-     */
-    public ApiResponse<AppUsageSession> createAppUserSessionWithHttpInfo(String token) throws SaferizeApiException {
+    private ApiResponse<AppUsageSession> createAppUserSessionWithHttpInfo(String token) throws SaferizeApiException {
         com.squareup.okhttp.Call call = createAppUserSessionValidateBeforeCall(token);
         Type localVarReturnType = new TypeToken<AppUsageSession>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
