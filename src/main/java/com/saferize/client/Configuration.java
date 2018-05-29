@@ -1,6 +1,3 @@
-
-
-
 package com.saferize.client;
 
 public class Configuration {

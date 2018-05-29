@@ -1,6 +1,3 @@
-
-
-
 package com.saferize.client;
 
 import java.io.File;
