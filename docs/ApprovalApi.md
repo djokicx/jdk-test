@@ -32,7 +32,7 @@ try {
     Approval result = apiInstance.getApprovalById(667L);
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling ApprovalApi#getApprovalById");
+    System.err.println("Exception when calling getApprovalById");
     e.printStackTrace();
 }
 ```
@@ -78,7 +78,7 @@ try {
     Approval result = apiInstance.getApprovalByToken("username");
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling ApprovalApi#getApprovalByToken");
+    System.err.println("Exception when calling getApprovalByToken");
     e.printStackTrace();
 }
 ```
@@ -126,7 +126,7 @@ try {
     List<Approval> result = apiInstance.getApprovals();
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling ApprovalApi#getApprovals");
+    System.err.println("Exception when calling getApprovals");
     e.printStackTrace();
 }
 ```
@@ -151,7 +151,7 @@ This endpoint does not need any parameter.
 
 <a name="initiateApproval"></a>
 # **initiateApproval**
-> Approval initiateApproval(bodyEmail, token)
+> Approval initiateApproval(parentEmail, token)
 
 Initiate an Approval
 
@@ -171,7 +171,7 @@ try {
     Approval result = apiInstance.initiateApproval("parent@email.com", "username");
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling ApprovalApi#initiateApproval");
+    System.err.println("Exception when calling initiateApproval");
     e.printStackTrace();
 }
 ```
@@ -180,7 +180,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**parentEmail** | **String**| Parent email specified at the upon approval creation. |
+**parentEmail** | **String**| Parent email specified when child registers. |
 **token** | **String**| The unique token assigned by the app to the user. |
 
 

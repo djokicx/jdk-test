@@ -28,7 +28,7 @@ try {
     AppUsageSession result = apiInstance.createAppUserSession("username");
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling SessionApi#createAppUserSession");
+    System.err.println("Exception when calling createAppUserSession");
     e.printStackTrace();
 }
 ```

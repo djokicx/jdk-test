@@ -26,7 +26,7 @@ import com.saferize.client.model.Approval;
  * API tests for ApprovalApi
  */
 
-//@Ignore
+@Ignore
 public class ApprovalApiTest {
 
     private static ApprovalApi api;

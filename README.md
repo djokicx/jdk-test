@@ -6,20 +6,6 @@ Building the API client library requires [Maven](https://maven.apache.org/) to b
 
 ## Installation
 
-To install the API client library to your local Maven repository, simply execute:
-
-```shell
-mvn install
-```
-
-To deploy it to a remote Maven repository instead, configure the settings of the repository and execute:
-
-```shell
-mvn deploy
-```
-
-Refer to the [official documentation](https://maven.apache.org/plugins/maven-deploy-plugin/usage.html) for more information.
-
 ### Maven users
 
 Add this dependency to your project's POM:
@@ -71,7 +57,7 @@ public class AppApiExample {
 		    Approval result = apiInstance.initiateApproval("parent@email.com", "username");
 		    System.out.println(result);
 		} catch (ApiException e) {
-		    System.err.println("Exception when calling ApprovalApi#initiateApproval");
+		    System.err.println("Exception when calling initiateApproval");
 		    e.printStackTrace();
 		}
     }
