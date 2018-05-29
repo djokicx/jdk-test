@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **Long** | Unique identifier for the approval returned by the system. | 
 **appUser** | [**AppUser**](AppUser.md) |  | 
-**status** | [**StatusEnum**](/#StatusEnum) | The approval status. | 
+**status** | **StatusEnum** | The approval status. | 
 **parentEmail** | **String** | Email of the parent who received this request. |  [optional]
 **parentMobilePhone** | **String** | Phone number of the parent who received this request. The format should be XXXYYYZZZZ (no dashes or parentheses). |  [optional]
-**currentState** | [**CurrentStateEnum**](/#CurrentStateEnum) | Current state of the approval. |  [optional]
+**currentState** | **CurrentStateEnum** | Current state of the approval. |  [optional]
 
 
 
