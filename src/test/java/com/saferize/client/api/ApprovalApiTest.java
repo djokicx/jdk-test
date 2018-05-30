@@ -1,6 +1,3 @@
-
-
-
 package com.saferize.client.api;
 
 import static org.junit.Assert.*;
@@ -16,7 +13,6 @@ import org.junit.Test;
 
 import com.saferize.client.ApiClient;
 import com.saferize.client.SaferizeApiException;
-import com.saferize.client.auth.HttpBearerAuth;
 import com.saferize.client.model.Approval;
 
 
@@ -24,7 +20,7 @@ import com.saferize.client.model.Approval;
  * API tests for ApprovalApi
  */
 
-//@Ignore
+@Ignore
 public class ApprovalApiTest {
 
     private static ApprovalApi api;

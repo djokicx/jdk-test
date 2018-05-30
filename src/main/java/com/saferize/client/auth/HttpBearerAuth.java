@@ -1,6 +1,3 @@
-
-
-
 package com.saferize.client.auth;
 
 import java.io.IOException;

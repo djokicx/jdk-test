@@ -1,6 +1,3 @@
-
-
-
 package com.saferize.client.api;
 
 import static org.junit.Assert.*;

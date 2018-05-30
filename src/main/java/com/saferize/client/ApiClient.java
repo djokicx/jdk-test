@@ -31,8 +31,7 @@ import com.squareup.okhttp.internal.http.HttpMethod;
 
 public class ApiClient {
 
-//    private String basePath = "http://api.saferize.com";
-    private String basePath = "http://api.dev.saferize";
+    private String basePath = "http://api.saferize.com";
     
     private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
 
