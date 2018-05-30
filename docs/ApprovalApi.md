@@ -114,7 +114,7 @@ Name | Type | Description  | Notes
 # **getApprovals**
 > List<Approval> getApprovals()
 
-List App approvals
+Retrieve all approvals on this App
 
 Retrieves all the approvals associated with the app.
 
