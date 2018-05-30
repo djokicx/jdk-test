@@ -44,14 +44,24 @@ import java.util.*;
 public class AppApiExample {
 
     public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        ApiClient client = new ApiClient();
+        // you may view/set all the fields of the api client such as authentication, base path, etc.
+        client.
         
-        // Configure authorization: Bearer
-        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("Bearer");
+        // configure authentication either 
+
+        // thru the client
+        client.setPrivateKeyFromPEM("src/main/resources/private_key.pem");
+        client.setApiKey("4a98ed10-3492-43b2-b3d6-545d988b64f2");
+        
+        /* ------------ OR ------------ */
+        
+        // by directly interacting with the Authentication object
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) client.getAuthentication("Bearer");
         bearerAuth.setPrivateKeyFromPEM("src/main/resources/private_key.pem");
         bearerAuth.setApiKey("4a98ed10-3492-43b2-b3d6-545d988b64f2");
         
-        ApprovalApi api = new ApprovalApi();
+        ApprovalApi api = new ApprovalApi(client);
         
 		try {
 		    Approval result = apiInstance.initiateApproval("parent@email.com", "username");

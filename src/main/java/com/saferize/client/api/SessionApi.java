@@ -1,6 +1,3 @@
-
-
-
 package com.saferize.client.api;
 
 import java.lang.reflect.Type;
@@ -11,6 +8,7 @@ import java.util.Map;
 
 import com.google.gson.reflect.TypeToken;
 import com.saferize.client.SaferizeApiException;
+import com.saferize.client.ApiClient;
 import com.saferize.client.ApiResponse;
 import com.saferize.client.Pair;
 import com.saferize.client.model.AppUsageSession;
@@ -19,8 +17,8 @@ import com.saferize.client.model.AppUsageSession;
 
 public class SessionApi extends SaferizeApi {
 
-    public SessionApi() {
-        super();
+    public SessionApi(ApiClient client) {
+        super(client);
     }
     
     /**

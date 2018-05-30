@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
-import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.security.GeneralSecurityException;
 import java.security.NoSuchAlgorithmException;
@@ -14,15 +13,11 @@ import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
-
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.OffsetDateTime;
 
 import com.saferize.client.auth.Authentication;
 import com.saferize.client.auth.HttpBearerAuth;
@@ -33,23 +28,19 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 import com.squareup.okhttp.internal.http.HttpMethod;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
 
 public class ApiClient {
 
-    private String basePath = "http://api.saferize.com";
-    private boolean debugging = false;
+//    private String basePath = "http://api.saferize.com";
+    private String basePath = "http://api.dev.saferize";
+    
     private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
-    private String tempFolderPath = null;
 
     private Map<String, Authentication> authentications;
 
 
     private OkHttpClient httpClient;
     private JSON json;
-
-    private HttpLoggingInterceptor loggingInterceptor;
 
     /*
      * Constructor for ApiClient
@@ -63,6 +54,7 @@ public class ApiClient {
         setUserAgent("Saferize/1.0.0/java");
 
         // Setup authentications (key: authentication name, value: authentication).
+        
         authentications = new HashMap<String, Authentication>();
         authentications.put("Bearer", new HttpBearerAuth());
         // Prevent the authentications from being modified.
@@ -72,7 +64,7 @@ public class ApiClient {
     /**
      * Get base path
      *
-     * @return Baes path
+     * @return Base path
      */
     public String getBasePath() {
         return basePath;
@@ -81,7 +73,7 @@ public class ApiClient {
     /**
      * Set base path
      *
-     * @param basePath Base path of the URL (e.g http://api.saferize.com
+     * @param basePath Base path of the URL (e.g http://api.saferize.com)
      * @return An instance of OkHttpClient
      */
     public ApiClient setBasePath(String basePath) {
@@ -106,26 +98,6 @@ public class ApiClient {
      */
     public ApiClient setHttpClient(OkHttpClient httpClient) {
         this.httpClient = httpClient;
-        return this;
-    }
-
-    /**
-     * Get JSON
-     *
-     * @return JSON object
-     */
-    public JSON getJSON() {
-        return json;
-    }
-
-    /**
-     * Set JSON
-     *
-     * @param json JSON object
-     * @return Api client
-     */
-    public ApiClient setJSON(JSON json) {
-        this.json = json;
         return this;
     }
     
@@ -154,9 +126,9 @@ public class ApiClient {
     }
 
     /**
-     * Helper method to set username for the first HTTP basic authentication.
+     * Set's the Api Key.
      *
-     * @param username Username
+     * @param String apiKey
      */
     
     public void setApiKey(String apiKey) {
@@ -170,10 +142,10 @@ public class ApiClient {
     }
 
     /**
-     * Helper method to set password for the first HTTP basic authentication.
+     * Set's the Private Key.
      *
-     * @param password Password
      */
+    
     public void setPrivateKey(RSAPrivateKey pk) {
         for (Authentication auth : authentications.values()) {
             if (auth instanceof HttpBearerAuth) {
@@ -229,59 +201,6 @@ public class ApiClient {
     }
 
     /**
-     * Check that whether debugging is enabled for this API client.
-     *
-     * @return True if debugging is enabled, false otherwise.
-     */
-    public boolean isDebugging() {
-        return debugging;
-    }
-
-    /**
-     * Enable/disable debugging for this API client.
-     *
-     * @param debugging To enable (true) or disable (false) debugging
-     * @return ApiClient
-     */
-    public ApiClient setDebugging(boolean debugging) {
-        if (debugging != this.debugging) {
-            if (debugging) {
-                loggingInterceptor = new HttpLoggingInterceptor();
-                loggingInterceptor.setLevel(Level.BODY);
-                httpClient.interceptors().add(loggingInterceptor);
-            } else {
-                httpClient.interceptors().remove(loggingInterceptor);
-                loggingInterceptor = null;
-            }
-        }
-        this.debugging = debugging;
-        return this;
-    }
-
-    /**
-     * The path of temporary folder used to store downloaded files from endpoints
-     * with file response. The default value is <code>null</code>, i.e. using
-     * the system's default tempopary folder.
-     *
-     * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/com/File.html#createTempFile">createTempFile</a>
-     * @return Temporary folder path
-     */
-    public String getTempFolderPath() {
-        return tempFolderPath;
-    }
-
-    /**
-     * Set the tempoaray folder path (for downloading files)
-     *
-     * @param tempFolderPath Temporary folder path
-     * @return ApiClient
-     */
-    public ApiClient setTempFolderPath(String tempFolderPath) {
-        this.tempFolderPath = tempFolderPath;
-        return this;
-    }
-
-    /**
      * Get connection timeout (in milliseconds).
      *
      * @return Timeout in milliseconds
@@ -311,11 +230,8 @@ public class ApiClient {
     public String parameterToString(Object param) {
         if (param == null) {
             return "";
-        } else if (param instanceof Date || param instanceof OffsetDateTime || param instanceof LocalDate) {
-            //Serialize to json string and remove the " enclosing characters
-            String jsonStr = json.serialize(param);
-            return jsonStr.substring(1, jsonStr.length() - 1);
-        } else if (param instanceof Collection) {
+        }
+        else if (param instanceof Collection) {
             StringBuilder b = new StringBuilder();
             for (Object o : (Collection<?>)param) {
                 if (b.length() > 0) {
@@ -777,22 +693,6 @@ public class ApiClient {
             Authentication auth = authentications.get(authName);
             if (auth == null) throw new RuntimeException("Authentication undefined: " + authName);
             auth.applyToParams(headerParams);
-        }
-    }
-
-
-    /**
-     * Guess Content-Type header from the given file (defaults to "application/octet-stream").
-     *
-     * @param file The given file
-     * @return The guessed Content-Type
-     */
-    public String guessContentTypeFromFile(File file) {
-        String contentType = URLConnection.guessContentTypeFromName(file.getName());
-        if (contentType == null) {
-            return "application/octet-stream";
-        } else {
-            return contentType;
         }
     }
 }

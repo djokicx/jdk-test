@@ -20,9 +20,12 @@ Create an app user session
 //import com.saferize.client.SaferizeApiException;
 //import com.saferize.client.api.ApprovalApi;
 
+ApiClient client = new ApiClient();
 
+client.setPrivateKeyFromPEM("src/main/resources/private_key.pem");
+client.setApiKey("4a98ed10-3492-43b2-b3d6-545d988b64f2");
 
-SessionApi apiInstance = new SessionApi();
+SessionApi apiInstance = new SessionApi(client);
 
 try {
     AppUsageSession result = apiInstance.createAppUserSession("username");

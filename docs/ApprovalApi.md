@@ -24,9 +24,12 @@ Retrieve an Approval via identifier
 //import com.saferize.client.SaferizeApiException;
 //import com.saferize.client.api.ApprovalApi;
 
+ApiClient client = new ApiClient();
 
+client.setPrivateKeyFromPEM("src/main/resources/private_key.pem");
+client.setApiKey("4a98ed10-3492-43b2-b3d6-545d988b64f2");
 
-ApprovalApi apiInstance = new ApprovalApi();
+ApprovalApi apiInstance = new ApprovalApi(client);
 
 try {
     Approval result = apiInstance.getApprovalById(667L);
@@ -70,9 +73,12 @@ Retrieve an Approval via token
 //import com.saferize.client.SaferizeApiException;
 //import com.saferize.client.api.ApprovalApi;
 
+ApiClient client = new ApiClient();
 
+client.setPrivateKeyFromPEM("src/main/resources/private_key.pem");
+client.setApiKey("4a98ed10-3492-43b2-b3d6-545d988b64f2");
 
-ApprovalApi apiInstance = new ApprovalApi();
+ApprovalApi apiInstance = new ApprovalApi(client);
 
 try {
     Approval result = apiInstance.getApprovalByToken("username");
@@ -118,9 +124,12 @@ Retrieves all the approvals associated with the app.
 //import com.saferize.client.SaferizeApiException;
 //import com.saferize.client.api.ApprovalApi;
 
+ApiClient client = new ApiClient();
 
+client.setPrivateKeyFromPEM("src/main/resources/private_key.pem");
+client.setApiKey("4a98ed10-3492-43b2-b3d6-545d988b64f2");
 
-ApprovalApi apiInstance = new ApprovalApi();
+ApprovalApi apiInstance = new ApprovalApi(client);
 
 try {
     List<Approval> result = apiInstance.getApprovals();
@@ -163,9 +172,12 @@ A new approval object is created in order to get parent consent to add a new app
 //import com.saferize.client.SaferizeApiException;
 //import com.saferize.client.api.ApprovalApi;
 
+ApiClient client = new ApiClient();
 
+client.setPrivateKeyFromPEM("src/main/resources/private_key.pem");
+client.setApiKey("4a98ed10-3492-43b2-b3d6-545d988b64f2");
 
-ApprovalApi apiInstance = new ApprovalApi();
+ApprovalApi apiInstance = new ApprovalApi(client);
 
 try {
     Approval result = apiInstance.initiateApproval("parent@email.com", "username");

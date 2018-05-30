@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import com.saferize.client.ApiClient;
 import com.saferize.client.ApiResponse;
 import com.saferize.client.Pair;
 import com.saferize.client.SaferizeApiException;
@@ -16,8 +17,8 @@ import com.saferize.client.model.Approval;
 
 public class ApprovalApi extends SaferizeApi{
 
-    public ApprovalApi() {
-        super();
+    public ApprovalApi(ApiClient client) {
+        super(client);
     }
     
     /**

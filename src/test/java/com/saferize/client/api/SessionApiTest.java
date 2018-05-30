@@ -14,7 +14,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import com.saferize.client.ApiClient;
-import com.saferize.client.Configuration;
 import com.saferize.client.SaferizeApiException;
 import com.saferize.client.auth.HttpBearerAuth;
 import com.saferize.client.model.AppUsageSession;
@@ -33,15 +32,16 @@ public class SessionApiTest {
     @BeforeClass
     public static void setup() throws IOException, GeneralSecurityException {
         
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        ApiClient client = new ApiClient();
         
         // Configure authorization: Bearer
-        HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("Bearer");
+        HttpBearerAuth bearerAuth = (HttpBearerAuth) client.getAuthentication("Bearer");
         bearerAuth.setPrivateKeyFromPEM("src/main/resources/private_key.pem");
         bearerAuth.setApiKey("4a98ed10-3492-43b2-b3d6-545d988b64f2");
         
-        approvalApi = new ApprovalApi();
-        sessionApi = new SessionApi();
+        
+        approvalApi = new ApprovalApi(client);
+        sessionApi = new SessionApi(client);
     }
     
     /**
